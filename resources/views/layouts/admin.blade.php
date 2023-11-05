@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{asset('public')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('public')}}/dist/css/adminlte.min.css">
+    <!-- toastr style -->
+    <link rel="stylesheet" href="{{asset('public')}}/plugins/toastr/toastr.css">
 </head>
 <body>
 <div class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -781,6 +783,17 @@
                             <i class="nav-icon far fa-circle text-info"></i>
                             <p>Informational</p>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </nav>
@@ -1682,6 +1695,11 @@
 <script src="{{asset('public')}}/plugins/jquery-mapael/maps/usa_states.min.js"></script>
 <!-- ChartJS -->
 <script src="{{asset('public')}}/plugins/chart.js/Chart.min.js"></script>
+
+<!-- toastr -->
+<script src="{{asset('public')}}/plugins/toastr/toastr.min.js"></script>
+<!-- sweetalert -->
+<script src="{{asset('public')}}/plugins/sweetalert2/sweetalert2.min.js"></script>
 
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('public')}}/dist/js/demo.js"></script>

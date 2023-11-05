@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +14,5 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/admin', [HomeController::class, 'admin'])->name('admin.home')->middleware('is_admin');
+Route::get('/admin', [AdminController::class, 'admin'])->name('admin.home')->middleware('is_admin');
 

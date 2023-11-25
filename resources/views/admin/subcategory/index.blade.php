@@ -36,6 +36,7 @@
                                         <th>SL</th>
                                         <th>SubCategory Name</th>
                                         <th>SubCategory Slug</th>
+                                        <th>Category Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -45,6 +46,7 @@
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $row->subcategory_name }}</td>
                                         <td>{{ $row->subcategory_slug }}</td>
+                                        <td>{{ $row->category->category_name }}</td>
                                         <td>
                                             <a href="#" class="btn btn-info btn-sm edit" data-id="{{ $row->id }}" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit fa-sm"></i></a>
                                             <a href="{{ route('subcategory.delete', $row->id) }}" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i></a>
@@ -66,7 +68,7 @@
     </section>
     <!-- /.content -->
 </div>
-<!-- category insert Modal -->
+<!-- subcategory insert Modal -->
 <div class="modal fade" id="subcategoryModal" tabindex="-1" role="dialog" aria-labelledby="subcategoryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -100,7 +102,7 @@
         </div>
     </div>
 </div>
-<!-- category edit Modal -->
+<!-- subcategory edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

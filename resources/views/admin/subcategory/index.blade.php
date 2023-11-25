@@ -80,6 +80,14 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="category_name">Category Name <span class="text-danger">*</span></label>
+                        <select class="form-control" name="category_name" required>
+                            @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->category_name}}</option>     
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="subcategory_name">SubCategory Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="subcategory_name" name="subcategory_name" placeholder="Enter Category Name" required>
                     </div>
@@ -107,7 +115,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="subcategory_name">SubCategory Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="editsubcategory_name" name="subcategory_name" placeholder="Enter Category Name" required>
+                        <input type="text" class="form-control" id="editsubcategory_name" name="subcategory_name" required>
                         <input type="hidden" class="form-control" id="edit_id" name="id">
                     </div>
                 </div>
@@ -123,10 +131,10 @@
 <script>
     $('.edit').on('click', function(e) {
         e.preventDefault();
-        var cat_id = $(this).data('id');
+        var subcat_id = $(this).data('id');
 
-        $.get("subcategory/edit/" + cat_id, function(data) {
-            $('#editsubcategory_name').val(data.category_name);
+        $.get("subcategory/edit/" + subcat_id, function(data) {
+            $('#editsubcategory_name').val(data.subcategory_name);
             $('#edit_id').val(data.id);
         });
     });

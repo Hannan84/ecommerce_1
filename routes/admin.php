@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\ChildCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,5 +36,13 @@ Route::group(['middleware' => 'is_admin'], function () {
         Route::get('/delete/{id}', [SubCategoryController::class, 'destroy'])->name('subcategory.delete');
         Route::get('/edit/{id}', [SubCategoryController::class, 'edit']);
         Route::post('/update', [SubCategoryController::class, 'update'])->name('subcategory.update');
+    });
+    // childcategory routes 
+    Route::group(['prefix' => 'childcategory'], function () {
+        Route::get('/', [ChildCategoryController::class, 'index'])->name('childcategory.index');
+        // Route::post('/store', [ChildCategoryController::class, 'store'])->name('subcategory.store');
+        // Route::get('/delete/{id}', [ChildCategoryController::class, 'destroy'])->name('subcategory.delete');
+        // Route::get('/edit/{id}', [ChildCategoryController::class, 'edit']);
+        // Route::post('/update', [ChildCategoryController::class, 'update'])->name('subcategory.update');
     });
 });

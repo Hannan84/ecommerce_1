@@ -127,8 +127,8 @@
                 {data:'DT_RowIndex',name:'DT_RowIndex'},
                 {data:'childcategory_name',name:'childcategory_name'},
                 {data:'childcategory_slug',name:'childcategory_slug'},
-                {data:'category_name',name:'category_name'},
-                {data:'subcategory_name',name:'subcategory_name'},
+                {data:'category.category_name',name:'category.category_name'},
+                {data:'subcategory.subcategory_name',name:'subcategory.subcategory_name'},
                 {data:'action',name:'action',orderable:true, searchable:true},
             ]
         });

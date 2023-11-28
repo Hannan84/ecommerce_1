@@ -18,9 +18,8 @@ class ChildCategoryController extends Controller
 
     // childcategory index method for show all childcategory
     public function index(Request $request){
-
         if ($request->ajax()){
-            $data = Childcategory::all();
+            $data = Childcategory::with('category','subcategory')->get();
 
             return DataTables::of($data)
             ->addIndexColumn()

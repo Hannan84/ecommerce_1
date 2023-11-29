@@ -67,19 +67,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="" method="post">
+            <form action="{{ route('childcategory.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="category_name">Category Name <span class="text-danger">*</span></label>
-                        <select class="form-control" name="category_name" required>
+                        <label for="subcategory_id">Category/Subcategory<span class="text-danger">*</span></label>
+                        <select class="form-control" name="subcategory_id" required>
                             @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->category_name}}</option>
-                                @foreach ($subcategories as $subcategory)
-                                    @if ($category->id == $subcategory->category_id)
-                                        <option value="{{$subcategory->id}}">---{{ $subcategory->subcategory_name }}</option>     
-                                    @endif
-                                @endforeach     
+                            <option>{{$category->category_name}}</option>
+                            @foreach ($subcategories as $subcategory)
+                            @if ($category->id == $subcategory->category_id)
+                            <option value="{{$subcategory->id}}"> --- {{ $subcategory->subcategory_name }}</option>
+                            @endif
+                            @endforeach
                             @endforeach
                         </select>
                     </div>
@@ -96,7 +96,7 @@
     </div>
 </div>
 <!-- edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -121,21 +121,40 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    $(function childcategory(){
+    $(function childcategory() {
         var table = $('.ytable').DataTable({
-            processing:true,
-            serverSide:true,
-            ajax:"{{route('childcategory.index')}}",
-            columns:[
-                {data:'DT_RowIndex',name:'DT_RowIndex'},
-                {data:'childcategory_name',name:'childcategory_name'},
-                {data:'childcategory_slug',name:'childcategory_slug'},
-                {data:'category.category_name',name:'category.category_name'},
-                {data:'subcategory.subcategory_name',name:'subcategory.subcategory_name'},
-                {data:'action',name:'action',orderable:true, searchable:true},
+            processing: true,
+            serverSide: true,
+            ajax: "{{route('childcategory.index')}}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'childcategory_name',
+                    name: 'childcategory_name'
+                },
+                {
+                    data: 'childcategory_slug',
+                    name: 'childcategory_slug'
+                },
+                {
+                    data: 'category.category_name',
+                    name: 'category.category_name'
+                },
+                {
+                    data: 'subcategory.subcategory_name',
+                    name: 'subcategory.subcategory_name'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                },
             ]
         });
     });

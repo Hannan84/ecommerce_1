@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Subcategory;
 use App\Models\Category;
 use App\Models\Childcategory;
+use Illuminate\Support\Str;
 use DataTables;
 
 class ChildCategoryController extends Controller
@@ -35,6 +36,33 @@ class ChildCategoryController extends Controller
         }
         $categories = Category::all();
         $subcategories = Subcategory::all();
-        return view('admin.childcategory.index',compact('categories','subcategories'));
+        return view('admin.childcategory.index', compact('categories', 'subcategories'));
+    }
+
+    // childcategory store method 
+    public function store(Request $request)
+    {
+
+        // dd($request->all());
+        $validated = $request->validate([
+            'childcategory_name' => 'required|max:55',
+            'subcategory_id' => 'required',
+        ]);
+
+        $cat_id = Subcategory::where('id', $request->subcategory_id)->first();
+        if ($cat_id) {
+            Childcategory::create([
+                'category_id' => $cat_id->category_id,
+                'subcategory_id' => $request->subcategory_id,
+                'childcategory_name' => $request->childcategory_name,
+                'childcategory_slug' => Str::of($request->childcategory_name)->slug('-'),
+            ]);
+
+            toastr()->success('ChildCategory added successful!');
+            return redirect()->route('childcategory.index');
+        } else {
+            toastr()->error('Please select subcategory!');
+            return redirect()->back();
+        }
     }
 }

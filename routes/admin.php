@@ -40,7 +40,7 @@ Route::group(['middleware' => 'is_admin'], function () {
     // childcategory routes 
     Route::group(['prefix' => 'childcategory'], function () {
         Route::get('/', [ChildCategoryController::class, 'index'])->name('childcategory.index');
-        // Route::post('/store', [ChildCategoryController::class, 'store'])->name('subcategory.store');
+        Route::post('/store', [ChildCategoryController::class, 'store'])->name('childcategory.store');
         // Route::get('/delete/{id}', [ChildCategoryController::class, 'destroy'])->name('subcategory.delete');
         // Route::get('/edit/{id}', [ChildCategoryController::class, 'edit']);
         // Route::post('/update', [ChildCategoryController::class, 'update'])->name('subcategory.update');

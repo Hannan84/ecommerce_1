@@ -11,7 +11,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#subcategoryModal">+ Add New</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">+ Add New</button>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -57,12 +57,12 @@
     </section>
     <!-- /.content -->
 </div>
-<!-- subcategory insert Modal -->
-<div class="modal fade" id="subcategoryModal" tabindex="-1" role="dialog" aria-labelledby="subcategoryModalLabel" aria-hidden="true">
+<!-- insert Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="categoryModalLabel">Add New SubCategory</h5>
+                <h5 class="modal-title" id="addModalLabel">Add New ChildCategory</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -73,23 +73,29 @@
                     <div class="form-group">
                         <label for="category_name">Category Name <span class="text-danger">*</span></label>
                         <select class="form-control" name="category_name" required>
-
+                            @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                @foreach ($subcategories as $subcategory)
+                                    @if ($category->id == $subcategory->category_id)
+                                        <option value="{{$subcategory->id}}">---{{ $subcategory->subcategory_name }}</option>     
+                                    @endif
+                                @endforeach     
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="subcategory_name">SubCategory Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="subcategory_name" name="subcategory_name" placeholder="Enter Category Name" required>
+                        <label for="childcategory_name">ChildCategory Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="childcategory_name" name="childcategory_name" placeholder="Enter ChildCategory Name" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
                     <button type="submit" class="btn btn-primary">submit</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!-- subcategory edit Modal -->
+<!-- edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

@@ -32,6 +32,8 @@ class ChildCategoryController extends Controller
             ->rawColumns(['action'])
             ->make(true);
         }
-        return view('admin.childcategory.index');
+        $categories = Category::all();
+        $subcategories = Subcategory::all();
+        return view('admin.childcategory.index',compact('categories','subcategories'));
     }
 }

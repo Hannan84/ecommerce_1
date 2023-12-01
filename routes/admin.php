@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ChildCategoryController;
+use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,8 +42,17 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::group(['prefix' => 'childcategory'], function () {
         Route::get('/', [ChildCategoryController::class, 'index'])->name('childcategory.index');
         Route::post('/store', [ChildCategoryController::class, 'store'])->name('childcategory.store');
-        // Route::get('/delete/{id}', [ChildCategoryController::class, 'destroy'])->name('subcategory.delete');
-        // Route::get('/edit/{id}', [ChildCategoryController::class, 'edit']);
-        // Route::post('/update', [ChildCategoryController::class, 'update'])->name('subcategory.update');
+        Route::get('/delete/{id}', [ChildCategoryController::class, 'destroy'])->name('childcategory.delete');
+        Route::get('/edit/{id}', [ChildCategoryController::class, 'edit']);
+        Route::post('/update', [ChildCategoryController::class, 'update'])->name('childcategory.update');
+    });
+
+    // brand routes 
+    Route::group(['prefix' => 'brand'], function () {
+        Route::get('/', [BrandController::class, 'index'])->name('brand.index');
+        Route::post('/store', [BrandController::class, 'store'])->name('brand.store');
+        // Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('childcategory.delete');
+        // Route::get('/edit/{id}', [BrandController::class, 'edit']);
+        // Route::post('/update', [BrandController::class, 'update'])->name('childcategory.update');
     });
 });

@@ -11,7 +11,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#subcategoryModal">+ Add New</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">+ Add New</button>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -68,12 +68,12 @@
     </section>
     <!-- /.content -->
 </div>
-<!-- subcategory insert Modal -->
-<div class="modal fade" id="subcategoryModal" tabindex="-1" role="dialog" aria-labelledby="subcategoryModalLabel" aria-hidden="true">
+<!-- insert Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="categoryModalLabel">Add New SubCategory</h5>
+                <h5 class="modal-title" id="addModalLabel">Add New SubCategory</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -85,7 +85,7 @@
                         <label for="category_name">Category Name <span class="text-danger">*</span></label>
                         <select class="form-control" name="category_name" required>
                             @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->category_name}}</option>     
+                            <option value="{{$category->id}}">{{$category->category_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -102,7 +102,7 @@
         </div>
     </div>
 </div>
-<!-- subcategory edit Modal -->
+<!-- edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -112,20 +112,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('subcategory.update') }}" method="post">
-                @csrf
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="subcategory_name">SubCategory Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="editsubcategory_name" name="subcategory_name" required>
-                        <input type="hidden" class="form-control" id="edit_id" name="id">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
-                    <button type="submit" class="btn btn-primary">submit</button>
-                </div>
-            </form>
+            <div class="modal-body">
+
+            </div>
         </div>
     </div>
 </div>
@@ -136,8 +125,7 @@
         var subcat_id = $(this).data('id');
 
         $.get("subcategory/edit/" + subcat_id, function(data) {
-            $('#editsubcategory_name').val(data.subcategory_name);
-            $('#edit_id').val(data.id);
+            $('.modal-body').html(data);
         });
     });
 </script>

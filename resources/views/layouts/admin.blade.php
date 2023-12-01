@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{asset('public')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('public')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('public')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+
 </head>
 
 <body>
@@ -64,7 +66,6 @@
     <script src="{{asset('public')}}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('public')}}/dist/js/adminlte.js"></script>
-
     <!-- PAGE PLUGINS -->
     <!-- jQuery Mapael -->
     <script src="{{asset('public')}}/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>

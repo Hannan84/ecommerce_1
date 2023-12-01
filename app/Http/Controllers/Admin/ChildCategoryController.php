@@ -26,8 +26,8 @@ class ChildCategoryController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionbtn = '<a href="#" class="btn btn-info btn-sm edit" data-id="{{ $row->id }}" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit fa-sm"></i></a>
-                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i></a>';
+                    $actionbtn = '<a href="#" class="btn btn-info btn-sm edit" data-id="' . $row->id . '" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit fa-sm"></i></a>
+                <a href="' . route('childcategory.delete', [$row->id]) . '" onclick="return confirm(`Are you sure you?`);" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i></a>';
 
                     return $actionbtn;
                 })
@@ -64,5 +64,45 @@ class ChildCategoryController extends Controller
             toastr()->error('Please select subcategory!');
             return redirect()->back();
         }
+    }
+
+    // edit childcategory 
+    public function edit($id)
+    {
+        $categories = Category::all();
+        $subcategories = Subcategory::all();
+        $data = Childcategory::findorfail($id);
+        return view('admin.childcategory.edit', compact('data', 'categories', 'subcategories'));
+    }
+
+    // update childcategory 
+    public function update(Request $request)
+    {
+        $cat_id = Subcategory::where('id', $request->subcategory_id)->first();
+        $data = Childcategory::find($request->id);
+        if ($cat_id) {
+            $data->update([
+                'category_id' => $cat_id->category_id,
+                'subcategory_id' => $request->subcategory_id,
+                'childcategory_name' => $request->childcategory_name,
+                'childcategory_slug' => Str::of($request->childcategory_name)->slug('-'),
+            ]);
+
+            toastr()->success('ChildCategory update successful!');
+            return redirect()->back();
+        }
+
+        toastr()->error('Please select subcategory!');
+        return redirect()->back();
+    }
+
+    // delete childcategory 
+    public function destroy($id)
+    {
+        $data = Childcategory::find($id);
+        $data->delete();
+
+        toastr()->warning('ChildCategory deleted!');
+        return redirect()->back();
     }
 }

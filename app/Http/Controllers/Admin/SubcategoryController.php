@@ -16,15 +16,17 @@ class SubcategoryController extends Controller
     }
 
     // subcategory index method for show all subcategory
-    public function index(){
+    public function index()
+    {
 
         $data = Subcategory::all();
         $categories = Category::all();
-        return view('admin.subcategory.index',compact('data','categories'));
+        return view('admin.subcategory.index', compact('data', 'categories'));
     }
 
     // subcategory store method 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         // dd($request->all());
         $validated = $request->validate([
@@ -44,8 +46,9 @@ class SubcategoryController extends Controller
     // edit subcategory 
     public function edit($id)
     {
+        $categories = Category::all();
         $data = Subcategory::findorfail($id);
-        return response()->json($data);
+        return view('admin.subcategory.edit', compact('data', 'categories'));
     }
 
     // update subcategory 
@@ -53,6 +56,7 @@ class SubcategoryController extends Controller
     {
         $data = Subcategory::find($request->id);
         $data->update([
+            'category_id' => $request->category_id,
             'subcategory_name' => $request->subcategory_name,
             'subcategory_slug' => Str::of($request->subcategory_name)->slug('-'),
         ]);
@@ -69,5 +73,4 @@ class SubcategoryController extends Controller
         toastr()->warning('SubCategory deleted!');
         return redirect()->back();
     }
-
 }

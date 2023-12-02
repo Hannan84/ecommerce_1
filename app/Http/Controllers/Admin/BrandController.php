@@ -30,10 +30,10 @@ class BrandController extends Controller
 
                     return $actionbtn;
                 })
-                ->addColumn('brand_logo', function($row) {
-                    return '<img src="'.$row->brand_logo.'" width="90px"/>';
-                 })
-                ->rawColumns(['brand_logo','action'])
+                ->addColumn('brand_logo', function ($row) {
+                    return '<img src="' . $row->brand_logo . '" width="90px"/>';
+                })
+                ->rawColumns(['brand_logo', 'action'])
                 ->make(true);
         }
         return view('admin.brand.index');
@@ -63,22 +63,41 @@ class BrandController extends Controller
         toastr()->success('Brand added successful!');
         return redirect()->back();
     }
+    // edit brand 
+    public function edit($id)
+    {
+        $data = Brand::findorfail($id);
+        return view('admin.brand.edit', compact('data'));
+    }
+
+    // update brand 
+    public function update(Request $request)
+    {
+        $data = Brand::find($request->id);
+        $slug = Str::of($request->brand_name)->slug('-');
+        $data->update([
+            'brand_name' => $request->brand_name,
+            'brand_slug' => $slug,
+        ]);
+
+        toastr()->success('Brand update successful!');
+        return redirect()->back();
+    }
 
     // delete brand 
     public function destroy($id)
     {
         $data = Brand::find($id);
-        $image = str_replace('\\','/',$data->image);
-        dd($image);
-        // if($image){
-        //     unlink($image);
-        //     $data->delete();
-        //     toastr()->warning('Brand deleted!');
-        //     return redirect()->back();
-        // }else{
-        //     $data->delete();
-        //     toastr()->warning('Brand deleted!');
-        //     return redirect()->back();
-        // }
+        $image = str_replace('\\', '/', $data->brand_logo);
+        if ($image) {
+            unlink($image);
+            $data->delete();
+            toastr()->warning('Brand deleted!');
+            return redirect()->back();
+        } else {
+            $data->delete();
+            toastr()->warning('Brand deleted!');
+            return redirect()->back();
+        }
     }
 }

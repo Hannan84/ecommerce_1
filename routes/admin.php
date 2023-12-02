@@ -52,7 +52,7 @@ Route::group(['middleware' => 'is_admin'], function () {
         Route::get('/', [BrandController::class, 'index'])->name('brand.index');
         Route::post('/store', [BrandController::class, 'store'])->name('brand.store');
         Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
-        // Route::get('/edit/{id}', [BrandController::class, 'edit']);
-        // Route::post('/update', [BrandController::class, 'update'])->name('childcategory.update');
+        Route::get('/edit/{id}', [BrandController::class, 'edit']);
+        Route::post('/update', [BrandController::class, 'update'])->name('brand.update');
     });
 });

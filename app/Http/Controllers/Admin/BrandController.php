@@ -45,7 +45,7 @@ class BrandController extends Controller
 
         // dd($request->all());
         $validated = $request->validate([
-            'brand_name' => 'required|max:55',
+            'brand_name' => 'required|unique:brands|max:55',
         ]);
 
         $slug = Str::of($request->brand_name)->slug('-');
@@ -75,13 +75,33 @@ class BrandController extends Controller
     {
         $data = Brand::find($request->id);
         $slug = Str::of($request->brand_name)->slug('-');
-        $data->update([
-            'brand_name' => $request->brand_name,
-            'brand_slug' => $slug,
-        ]);
+        if ($request->brand_logo){
+            $old_image = str_replace('\\', '/', $request->old_logo);
+            if ($old_image) {
+                unlink($old_image);
+            }
+            $image = $request->brand_logo;
+            $image_name = $slug . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(240, 240)->save(public_path('images/brand/' . $image_name));
+            $data->update([
+                'brand_name' => $request->brand_name,
+                'brand_slug' => $slug,
+                'brand_logo' => 'public/images/brand/' . $image_name,
+            ]);
+    
+            toastr()->success('Brand update successful!');
+            return redirect()->back();
+        }else{
+            $data->update([
+                'brand_name' => $request->brand_name,
+                'brand_slug' => $slug,
+                'brand_logo' => $request->old_logo,
+            ]);
+    
+            toastr()->success('Brand update successful!');
+            return redirect()->back();
+        }
 
-        toastr()->success('Brand update successful!');
-        return redirect()->back();
     }
 
     // delete brand 
@@ -91,13 +111,9 @@ class BrandController extends Controller
         $image = str_replace('\\', '/', $data->brand_logo);
         if ($image) {
             unlink($image);
-            $data->delete();
-            toastr()->warning('Brand deleted!');
-            return redirect()->back();
-        } else {
-            $data->delete();
-            toastr()->warning('Brand deleted!');
-            return redirect()->back();
         }
+        $data->delete();
+        toastr()->warning('Brand deleted!');
+        return redirect()->back();
     }
 }

@@ -4,6 +4,9 @@
 <!-- dropify  -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css">
 <div class="content-wrapper">
+@error('brand_name')
+    <strong class="alert alert-danger">{{ $message }}</strong>
+@enderror
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -73,7 +76,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="brand_name">Brand Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="brand_name" name="brand_name" placeholder="Enter Brand Name" required>
+                        <input type="text" class="form-control @error('brand_name') is-invalid @enderror" id="brand_name" name="brand_name" placeholder="Enter Brand Name" required>
                     </div>
                     <div class="form-group">
                         <label for="brand_logo">Brand Logo <span class="text-danger">*</span></label>
@@ -97,7 +100,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="edit-modal-body">
 
             </div>
         </div>
@@ -148,7 +151,7 @@
         var id = $(this).data('id');
 
         $.get("brand/edit/" + id, function(data) {
-            $('.modal-body').html(data);
+            $('.edit-modal-body').html(data);
         });
     });
 </script>

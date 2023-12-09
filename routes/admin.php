@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin', [AdminController::class, 'admin'])->name('admin.home');
+    Route::get('/admin/password/change', [AdminController::class, 'passwordChange'])->name('admin.password.change');
+    Route::post('/admin/password/update', [AdminController::class, 'passwordUpdate'])->name('admin.password.update');
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     // category routes 

@@ -26,4 +26,24 @@ class AdminController extends Controller
         $notification = array('message' => 'You are logged out!', 'alert-type' => 'success');
         return redirect()->route('login')->with($notification);
     }
+
+    // password change
+    public function passwordChange(){
+        return view('admin.profile.pass_change');
+    }
+    // password update
+    public function passwordUpdate(Request $request){
+
+        // $validated = $request->validate([
+        //     'oldpassword' => 'required',
+        //     'password' => 'required|min:6|confirmed',
+        // ]);
+
+        $old_pass = Auth::user()->password;
+        if(Hash::check($old_pass,$request->oldpassword)){
+
+        }else{
+            
+        }
+    }
 }

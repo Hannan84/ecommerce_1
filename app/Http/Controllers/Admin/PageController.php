@@ -39,4 +39,14 @@ class PageController extends Controller
         toastr()->success('Page Create successful!');
         return redirect()->route('page.index');
     }
+
+    // delete page 
+    public function destroy($id)
+    {
+        $page = Page::find($id);
+        $page->delete();
+
+        toastr()->warning('Page deleted!');
+        return redirect()->back();
+    }
 }

@@ -47,7 +47,7 @@
                                         <td>{{ $row->page_title }}</td>
                                         <td>
                                             <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit fa-sm"></i></a>
-                                            <a href="#" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i></a>
+                                            <a href="{{ route('page.delete',$row->id) }}" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

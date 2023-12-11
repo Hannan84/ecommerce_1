@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,5 +58,28 @@ Route::group(['middleware' => 'is_admin'], function () {
         Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
         Route::get('/edit/{id}', [BrandController::class, 'edit']);
         Route::post('/update', [BrandController::class, 'update'])->name('brand.update');
+    });
+
+    // settings routes 
+    Route::group(['prefix' => 'setting'], function () {
+        // seo setting 
+        Route::group(['prefix' => 'seo'], function () {
+            Route::get('/', [SettingController::class, 'seo'])->name('setting.seo');
+            Route::post('/update', [SettingController::class, 'seoUpdate'])->name('setting.seo.update');
+        });
+        // smpt setting 
+        Route::group(['prefix' => 'smtp'], function () {
+            Route::get('/', [SettingController::class, 'smpt'])->name('setting.smtp');
+            Route::post('/update', [SettingController::class, 'smtpUpdate'])->name('setting.smtp.update');
+        });
+        // pages setting 
+        Route::group(['prefix' => 'page'], function () {
+            Route::get('/', [PageController::class, 'index'])->name('page.index');
+            Route::get('/create', [PageController::class, 'create'])->name('page.create');
+            Route::post('/store', [PageController::class, 'store'])->name('page.store');
+            Route::get('/delete/{id}', [PageController::class, 'destroy'])->name('page.delete');
+            Route::get('/edit/{id}', [PageController::class, 'edit']);
+            Route::post('/update', [PageController::class, 'update'])->name('page.update');
+        });
     });
 });

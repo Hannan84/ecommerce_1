@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="{{asset('public')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('public')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('public')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{asset('public')}}/plugins/summernote/summernote-bs4.min.css">
 
 </head>
 
@@ -89,6 +90,8 @@
     <script src="{{asset('public')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{asset('public')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{asset('public')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Summernote -->
+    <script src="{{asset('public')}}/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('public')}}/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -132,6 +135,12 @@
                 "responsive": true,
             });
         });
+    </script>
+    <!-- Summernote -->
+    <script>
+        $(function(){
+            $('.textarea').summernote();
+        })
     </script>
 </body>
 

@@ -49,4 +49,25 @@ class PageController extends Controller
         toastr()->warning('Page deleted!');
         return redirect()->back();
     }
+
+    // edit page 
+    public function edit($id){
+        $page = Page::find($id);
+        return view('admin.settings.page.edit',compact('page'));
+    }
+
+    // update page
+    public function update(Request $request){
+        $page = Page::find($request->id);
+        $page->update([
+            'page_position' => $request->page_position,
+            'page_name' => $request->page_name,
+            'page_slug' => Str::of($request->page_name)->slug('-'),
+            'page_title' => $request->page_title,
+            'page_description' => $request->page_description,
+        ]);
+
+        toastr()->success('Page Update successful!');
+        return redirect()->route('page.index');
+    }
 }

@@ -78,7 +78,7 @@ Route::group(['middleware' => 'is_admin'], function () {
             Route::get('/create', [PageController::class, 'create'])->name('page.create');
             Route::post('/store', [PageController::class, 'store'])->name('page.store');
             Route::get('/delete/{id}', [PageController::class, 'destroy'])->name('page.delete');
-            Route::get('/edit/{id}', [PageController::class, 'edit']);
+            Route::get('/edit/{id}', [PageController::class, 'edit'])->name('page.edit');
             Route::post('/update', [PageController::class, 'update'])->name('page.update');
         });
     });

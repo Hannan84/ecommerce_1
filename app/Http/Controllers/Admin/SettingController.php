@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Seo;
 use App\Models\Smtp;
+use App\Models\WebsiteSetting;
 
 class SettingController extends Controller
 {
@@ -58,5 +59,11 @@ class SettingController extends Controller
 
         toastr()->success('SMTP update successful!');
         return redirect()->back();
+    }
+
+    // website setting
+    public function website(){
+        $data = WebsiteSetting::first();
+        return view('admin.settings.websiteSetting',compact('data'));
     }
 }

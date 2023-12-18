@@ -84,7 +84,7 @@ Route::group(['middleware' => 'is_admin'], function () {
         // website setting 
         Route::group(['prefix' => 'website'], function () {
             Route::get('/', [SettingController::class, 'website'])->name('setting.website');
-            Route::post('/update', [SettingController::class, 'smtpUpdate'])->name('setting.smtp.update');
+            Route::post('/update', [SettingController::class, 'websiteUpdate'])->name('setting.website.update');
         });
     });
 });

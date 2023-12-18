@@ -32,7 +32,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{ route('setting.seo.update') }}" method="post">
+                    <form action="{{ route('setting.website.update') }}" method="post" enctype='multipart/form-data'>
                         @csrf
                         <div class="row card-body">
                             <div class="col-sm-6">
@@ -87,11 +87,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="logo">Logo</label>
-                                    <input type="file" class="form-control" name="logo" value="{{ $data->logo }}">
+                                    <input type="file" class="form-control" name="logo">
+                                    <input type="hidden" class="form-control" name="old_logo" value="{{ $data->logo }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="favicon">Favicon</label>
-                                    <input type="file" class="form-control" name="favicon" value="{{ $data->favicon }}">
+                                    <input type="file" class="form-control" name="favicon">
+                                    <input type="hidden" class="form-control" name="old_favicon" value="{{ $data->favicon }}">
                                 </div>
                             </div>
                             <input type="hidden" name="id" value="{{ $data->id }}">

@@ -66,4 +66,27 @@ class SettingController extends Controller
         $data = WebsiteSetting::first();
         return view('admin.settings.websiteSetting',compact('data'));
     }
+    // website setting update
+    public function websiteUpdate(Request $request){
+        $data = WebsiteSetting::find($request->id);
+
+        $data->update([
+            'currency' => $request->currency,
+            'phone_one' => $request->phone_one,
+            'phone_two' => $request->phone_two,
+            'main_email' => $request->main_email,
+            'support_email' => $request->support_email,
+            'address' => $request->address,
+            'logo' => $request->logo,
+            'favicon' => $request->favicon,
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'instagram' => $request->instagram,
+            'linkedin' => $request->linkedin,
+            'youtube' => $request->youtube,
+        ]);
+
+        toastr()->success('Website update successful!');
+        return redirect()->back();
+    }
 }

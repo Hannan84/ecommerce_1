@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,14 @@ Route::group(['middleware' => 'is_admin'], function () {
         Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
         Route::get('/edit/{id}', [CategoryController::class, 'edit']);
         Route::post('/update', [CategoryController::class, 'update'])->name('category.update');
+    });
+    // warehouse routes 
+    Route::group(['prefix' => 'warehouse'], function () {
+        Route::get('/', [WarehouseController::class, 'index'])->name('warehouse.index');
+        Route::post('/store', [WarehouseController::class, 'store'])->name('warehouse.store');
+        Route::get('/delete/{id}', [WarehouseController::class, 'destroy'])->name('warehouse.delete');
+        Route::get('/edit/{id}', [WarehouseController::class, 'edit']);
+        Route::post('/update', [WarehouseController::class, 'update'])->name('warehouse.update');
     });
     // subcategory routes 
     Route::group(['prefix' => 'subcategory'], function () {

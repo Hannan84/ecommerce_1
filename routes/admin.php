@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\WarehouseController;
+use App\Http\Controllers\Admin\CouponController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,6 +68,14 @@ Route::group(['middleware' => 'is_admin'], function () {
         Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
         Route::get('/edit/{id}', [BrandController::class, 'edit']);
         Route::post('/update', [BrandController::class, 'update'])->name('brand.update');
+    });
+    // coupon routes 
+    Route::group(['prefix' => 'coupon'], function () {
+        Route::get('/', [CouponController::class, 'index'])->name('coupon.index');
+        Route::post('/store', [CouponController::class, 'store'])->name('coupon.store');
+        Route::get('/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
+        Route::get('/edit/{id}', [CouponController::class, 'edit']);
+        Route::post('/update', [CouponController::class, 'update'])->name('coupon.update');
     });
 
     // settings routes 

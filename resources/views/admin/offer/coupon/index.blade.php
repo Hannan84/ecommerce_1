@@ -67,7 +67,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('coupon.store') }}" method="post">
+            <form action="{{ route('coupon.store') }}" method="post" id="add_form">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -123,7 +123,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(function coupon() {
-        var table = $('.ytable').DataTable({
+        table = $('.ytable').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{route('coupon.index')}}",
@@ -156,8 +156,27 @@
             ]
         });
     });
+
+    // add coupon
+    $('#add_form').submit(function(e){
+        e.preventDefault();
+        var url = $(this).attr('action');
+        var request = $(this).serialize();
+        $.ajax({
+            url:url,
+            type:'post',
+            data:request,
+            success:function(data){
+                toastr.success(data);
+                $('#add_form')[0].reset();
+                $('#addModal').modal('hide');
+                table.ajax.reload();
+            }
+        });
+    });
 </script>
 <script>
+
     // edit warehouse script 
     $('body').on('click', '.edit', function(e) {
         e.preventDefault();

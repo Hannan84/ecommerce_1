@@ -49,8 +49,6 @@ class CouponController extends Controller
             'type' => $request->coupon_type,
             'status' => $request->coupon_status,
         ]);
-
-        toastr()->success('Coupon added successful!');
-        return redirect()->route('coupon.index');
+        return response()->json('Coupon store');
     }
 }

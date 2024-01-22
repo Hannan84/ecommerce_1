@@ -29,7 +29,7 @@
                             <h3 class="card-title">Coupon List</h3>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body table-responsive">
                             <table id="" class="table table-bordered table-hover table-sm ytable">
                                 <thead>
                                     <tr>
@@ -167,7 +167,7 @@
             type:'post',
             data:request,
             success:function(data){
-                toastr.success(data);
+                // toastr.success(data);
                 $('#add_form')[0].reset();
                 $('#addModal').modal('hide');
                 table.ajax.reload();

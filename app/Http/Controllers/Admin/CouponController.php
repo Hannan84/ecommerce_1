@@ -25,7 +25,7 @@ class CouponController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionbtn = '<a href="#" class="btn btn-info btn-sm edit" data-id="' . $row->id . '" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit fa-sm"></i></a>
-                <a href="' . route('warehouse.delete', [$row->id]) . '" onclick="return confirm(`Are you sure you?`);" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i></a>';
+                <a href="' . route('coupon.delete', [$row->id]) . '" onclick="return confirm(`Are you sure you?`);" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i></a>';
 
                     return $actionbtn;
                 })
@@ -50,5 +50,16 @@ class CouponController extends Controller
             'status' => $request->coupon_status,
         ]);
         return response()->json('Coupon store');
+    }
+
+    // delete coupon 
+    public function destroy($id)
+    {
+        $data = Coupon::find($id);
+        $data->delete();
+
+        toastr()->success('Category deleted!');
+        return response()->json('Category deleted!');
+
     }
 }

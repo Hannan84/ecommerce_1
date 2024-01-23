@@ -73,7 +73,7 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::group(['prefix' => 'coupon'], function () {
         Route::get('/', [CouponController::class, 'index'])->name('coupon.index');
         Route::post('/store', [CouponController::class, 'store'])->name('coupon.store');
-        Route::get('/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
+        Route::delete('/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
         Route::get('/edit/{id}', [CouponController::class, 'edit']);
         Route::post('/update', [CouponController::class, 'update'])->name('coupon.update');
     });

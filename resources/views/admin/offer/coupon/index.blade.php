@@ -104,6 +104,10 @@
         </div>
     </div>
 </div>
+<!-- delete coupon form  -->
+<form action="" method="delete" id="delete_form">
+    @csrf @method('DELETE')
+</form>
 <!-- edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -167,10 +171,32 @@
             type:'post',
             data:request,
             success:function(data){
-                // toastr.success(data);
                 $('#add_form')[0].reset();
                 $('#addModal').modal('hide');
                 table.ajax.reload();
+                toastr.success(data);
+            }
+        });
+    });
+
+    // delete coupon
+    $('#delete_coupon').click(function(e){
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $('#delete_form').attr('action',url);
+        $('#delete_form').submit();
+    });
+    $('#delete_form').submit(function(e){
+        e.preventDefault();
+        var url = $(this).attr('action');
+        var request = $(this).serialize();
+        $.ajax({
+            url:url,
+            type:'post',
+            data:request,
+            success:function(data){
+                table.ajax.reload();
+                toastr.success(data);
             }
         });
     });

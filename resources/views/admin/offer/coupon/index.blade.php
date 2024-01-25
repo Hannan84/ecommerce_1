@@ -180,24 +180,30 @@
     });
 
     // delete coupon
-    $('#delete_coupon').click(function(e){
-        e.preventDefault();
-        var url = $(this).attr('href');
-        $('#delete_form').attr('action',url);
-        $('#delete_form').submit();
-    });
-    $('#delete_form').submit(function(e){
-        e.preventDefault();
-        var url = $(this).attr('action');
-        var request = $(this).serialize();
-        $.ajax({
-            url:url,
-            type:'post',
-            data:request,
-            success:function(data){
-                table.ajax.reload();
-                toastr.success(data);
+    $(document).ready(function(){
+        $(document).on('click', '#delete_coupon',function(e){
+            e.preventDefault();
+            var url = $(this).attr('href');
+            $('#delete_form').attr('action',url);
+            if (confirm('Are you sure you?')){
+                $('#delete_form').submit();
             }
+        });
+        $('#delete_form').submit(function(e){
+            e.preventDefault();
+            var url = $(this).attr('action');
+            var request = $(this).serialize();
+            $.ajax({
+                url:url,
+                type:'post',
+                async:false,
+                data:request,
+                success:function(data){
+                    $('#delete_form')[0].reset();
+                    table.ajax.reload();
+                    toastr.success(data);
+                }
+            });
         });
     });
 </script>

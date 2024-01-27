@@ -15,6 +15,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('public')}}/dist/css/adminlte.min.css">
     <!-- toastr style -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="{{asset('public')}}/plugins/toastr/toastr.css">
     <link rel="stylesheet" href="{{asset('public')}}/plugins/sweetalert2.min.css">
     <!-- DataTables -->
@@ -96,6 +97,7 @@
     <script src="{{asset('public')}}/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{asset('public')}}/dist/js/pages/dashboard2.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
         $(document).on("click", "#delete", function(e) {
             e.preventDefault();

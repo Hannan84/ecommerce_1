@@ -171,10 +171,10 @@
             type:'post',
             data:request,
             success:function(data){
+                toastr.success(data);
                 $('#add_form')[0].reset();
                 $('#addModal').modal('hide');
                 table.ajax.reload();
-                toastr.success(data);
             }
         });
     });
@@ -199,9 +199,9 @@
                 async:false,
                 data:request,
                 success:function(data){
+                    toastr.success(data);
                     $('#delete_form')[0].reset();
                     table.ajax.reload();
-                    toastr.success(data);
                 }
             });
         });

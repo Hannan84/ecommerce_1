@@ -57,9 +57,7 @@ class CouponController extends Controller
     {
         $data = Coupon::find($id);
         $data->delete();
-
-        toastr()->success('Category deleted!');
-        return response()->json('Category deleted!');
+        return response()->json('Coupon deleted!');
 
     }
 }

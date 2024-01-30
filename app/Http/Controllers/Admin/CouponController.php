@@ -52,6 +52,13 @@ class CouponController extends Controller
         return response()->json('Coupon store');
     }
 
+    // edit brand 
+    public function edit($id)
+    {
+        $data = Coupon::findorfail($id);
+        return view('admin.coupon.edit', compact('data'));
+    }
+
     // delete coupon 
     public function destroy($id)
     {

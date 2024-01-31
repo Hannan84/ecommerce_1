@@ -56,7 +56,22 @@ class CouponController extends Controller
     public function edit($id)
     {
         $data = Coupon::findorfail($id);
-        return view('admin.coupon.edit', compact('data'));
+        return view('admin.offer.coupon.edit', compact('data'));
+    }
+
+    //update coupon
+    public function update(Request $request){
+
+        $data = Coupon::find($request->id);
+
+        $data->update([
+            'coupon_code' => $request->coupon_code,
+            'valid_date' => $request->coupon_date,
+            'coupon_amount' => $request->coupon_amount,
+            'type' => $request->coupon_type,
+            'status' => $request->coupon_status,
+        ]);
+        return response()->json('Coupon update');
     }
 
     // delete coupon 

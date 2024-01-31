@@ -104,16 +104,13 @@
         </div>
     </div>
 </div>
-<!-- delete coupon form  -->
-<form action="" method="delete" id="delete_form">
-    @csrf @method('DELETE')
-</form>
+
 <!-- edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Update Warehouse</h5>
+                <h5 class="modal-title" id="editModalLabel">Update Coupon</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -124,6 +121,12 @@
         </div>
     </div>
 </div>
+
+<!-- delete coupon form  -->
+<form action="" method="delete" id="delete_form">
+    @csrf @method('DELETE')
+</form>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(function coupon() {
@@ -179,6 +182,16 @@
         });
     });
 
+    // edit warehouse script 
+    $('body').on('click', '.edit', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+
+        $.get("coupon/edit/" + id, function(data) {
+            $('.modal-body').html(data);
+        });
+    });
+
     // delete coupon
     $(document).ready(function(){
         $(document).on('click', '#delete_coupon',function(e){
@@ -204,18 +217,6 @@
                     table.ajax.reload();
                 }
             });
-        });
-    });
-</script>
-<script>
-
-    // edit warehouse script 
-    $('body').on('click', '.edit', function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-
-        $.get("warehouse/edit/" + id, function(data) {
-            $('.modal-body').html(data);
         });
     });
 </script>

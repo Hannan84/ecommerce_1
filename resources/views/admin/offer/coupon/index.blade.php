@@ -115,7 +115,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div id="modal-body">
 
             </div>
         </div>
@@ -182,13 +182,13 @@
         });
     });
 
-    // edit warehouse script 
+    // edit coupon script 
     $('body').on('click', '.edit', function(e) {
         e.preventDefault();
         var id = $(this).data('id');
 
         $.get("coupon/edit/" + id, function(data) {
-            $('.modal-body').html(data);
+            $('#modal-body').html(data);
         });
     });
 

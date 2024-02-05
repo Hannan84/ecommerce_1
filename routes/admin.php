@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\PickupPointController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,7 @@ Route::group(['middleware' => 'is_admin'], function () {
         Route::get('/edit/{id}', [BrandController::class, 'edit']);
         Route::post('/update', [BrandController::class, 'update'])->name('brand.update');
     });
+
     // coupon routes 
     Route::group(['prefix' => 'coupon'], function () {
         Route::get('/', [CouponController::class, 'index'])->name('coupon.index');
@@ -76,6 +78,15 @@ Route::group(['middleware' => 'is_admin'], function () {
         Route::delete('/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
         Route::get('/edit/{id}', [CouponController::class, 'edit']);
         Route::post('/update', [CouponController::class, 'update'])->name('coupon.update');
+    });
+
+    // pickup-point routes 
+    Route::group(['prefix' => 'pickupPoint'], function () {
+        Route::get('/', [PickupPointController::class, 'index'])->name('pickupPoint.index');
+        Route::post('/store', [PickupPointController::class, 'store'])->name('pickupPoint.store');
+        Route::delete('/delete/{id}', [PickupPointController::class, 'destroy'])->name('pickupPoint.delete');
+        Route::get('/edit/{id}', [PickupPointController::class, 'edit']);
+        Route::post('/update', [PickupPointController::class, 'update'])->name('pickupPoint.update');
     });
 
     // settings routes 

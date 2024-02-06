@@ -4,6 +4,7 @@
         <div class="form-group">
             <label for="name">PickupPoint Name</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ $data->name }}" required>
+            <input type="hidden" name="id" value="{{ $data->id }}">
         </div>
         <div class="form-group">
             <label for="address">PickupPoint Address</label>

@@ -80,7 +80,7 @@ Route::group(['middleware' => 'is_admin'], function () {
         Route::post('/update', [CouponController::class, 'update'])->name('coupon.update');
     });
 
-    // pickup-point routes 
+    // pickup_point routes 
     Route::group(['prefix' => 'pickupPoint'], function () {
         Route::get('/', [PickupPointController::class, 'index'])->name('pickupPoint.index');
         Route::post('/store', [PickupPointController::class, 'store'])->name('pickupPoint.store');

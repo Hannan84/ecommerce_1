@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\WarehouseController;
@@ -69,6 +70,15 @@ Route::group(['middleware' => 'is_admin'], function () {
         Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
         Route::get('/edit/{id}', [BrandController::class, 'edit']);
         Route::post('/update', [BrandController::class, 'update'])->name('brand.update');
+    });
+
+    // product routes 
+    Route::group(['prefix' => 'product'], function () {
+        Route::get('/', [ProductController::class, 'create'])->name('product.create');
+        // Route::post('/store', [ProductController::class, 'store'])->name('brand.store');
+        // Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('brand.delete');
+        // Route::get('/edit/{id}', [ProductController::class, 'edit']);
+        // Route::post('/update', [ProductController::class, 'update'])->name('brand.update');
     });
 
     // coupon routes 
